@@ -19,6 +19,12 @@ public class MyWorld extends greenfoot.World
     private boolean mouseHeld = false;
 
     private Actor newNote;
+    
+    private Reset reset = new Reset();
+    private Reader_Bar readerBar = new Reader_Bar();
+    private TempoUp tempoUp = new TempoUp();
+    private TempoDown tempoDown = new TempoDown();
+    
     private int snapX;
     private int snapY;
     
@@ -32,9 +38,9 @@ public class MyWorld extends greenfoot.World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1150, 500, 1); 
-        choose();
-        addObject(new Reset(),25,25);
-        addObject(new Reader_Bar(), 154, getHeight()/2);
+        addAll();
+        displayTempo();
+        changeTempo();
     }
     public boolean addedAgain()
     {
@@ -64,14 +70,13 @@ public class MyWorld extends greenfoot.World
         tempo = t;
     }
 
-    private void choose()
+    private void addAll()
     {
-        //addObject(new A(), 25, 375);
-        //addObject(new B(), 75, 375);
-        //addObject(new C(), 125, 375);
-        //addObject(new D(), 25, 425);
-        //addObject(new E(), 75, 425);
-        //addObject(
+    
+        addObject(reset,25,25);
+        addObject(readerBar, 154, getHeight()/2);
+        addObject(tempoUp,75, 475);
+        addObject(tempoDown, 125, 475);
         for( int i = 0; i < notes.length; i++)
         {
             addObject( notes[i], notesXLocations[i], notesYLocations[i]);
@@ -89,43 +94,48 @@ public class MyWorld extends greenfoot.World
 
         if( mouseHeld == false && Greenfoot.mousePressed(null) )
         {
+            
             mouseHeld = true;
 
-            if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400)
+            if( Greenfoot.mousePressed(reset) == false && Greenfoot.mousePressed(readerBar) == false && Greenfoot.mousePressed(tempoUp) == false && Greenfoot.mousePressed(tempoDown) == false )
             {
-                newNote = new A();
-                
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
-            }
-            else if( mouseLocation.getX() > 50 && mouseLocation.getX() < 100 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400 )
-            {
-                newNote = new B();
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
-            }
-            else if( mouseLocation.getX() > 100 && mouseLocation.getX() < 150 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400 )
-            {
-                newNote = new C();
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
-            }
-            else if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
-            {
-                newNote = new D();
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
-            }
-            else if( mouseLocation.getX() > 50 && mouseLocation.getX() < 100 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
-            {
-                newNote = new E();
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
-            }
-            else if( mouseLocation.getX() > 100 && mouseLocation.getX() < 150 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
-            {
-                newNote = new F();
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
-            }
-            else if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 450 && mouseLocation.getY() < 500  )
-            {
-                newNote = new G();
-                addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+            
+                if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400)
+                {
+                    newNote = new A();
+                    
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
+                else if( mouseLocation.getX() > 50 && mouseLocation.getX() < 100 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400 )
+                {
+                    newNote = new B();
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
+                else if( mouseLocation.getX() > 100 && mouseLocation.getX() < 150 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400 )
+                {
+                    newNote = new C();
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
+                else if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
+                {
+                    newNote = new D();
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
+                else if( mouseLocation.getX() > 50 && mouseLocation.getX() < 100 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
+                {
+                    newNote = new E();
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
+                else if( mouseLocation.getX() > 100 && mouseLocation.getX() < 150 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
+                {
+                    newNote = new F();
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
+                else if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 450 && mouseLocation.getY() < 500  )
+                {
+                    newNote = new G();
+                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                }
             }
         }
         else if( Greenfoot.mouseClicked(null) || mouseLocation == null )
@@ -273,8 +283,21 @@ public class MyWorld extends greenfoot.World
             //if(mouseLocation.getY() > 450 && mouseLocation.getY() < 500)
             snapY = 475;
         }
+       
+        if( newNote != null )
+        {
+            newNote.setLocation(snapX, snapY);
+        }
+    
+    }
+    private void displayTempo()
+    {
+        showText("Tempo  " + tempo, 100, 25);
         
-        newNote.setLocation(snapX, snapY);
+    }
+    public void changeTempo()
+    {
         
+ 
     }
 }
