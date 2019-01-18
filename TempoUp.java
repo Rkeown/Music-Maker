@@ -15,14 +15,15 @@ public class TempoUp extends Actor
     public void act() 
     {
         // Add your action code here.
-        changeTempo();
+        tempoUp();
     }    
-    private void changeTempo()
+    private void tempoUp()
     {
         MyWorld world = (MyWorld) getWorld();
-        if(Greenfoot.mousePressed(this))
+        if(Greenfoot.mouseClicked(this))
         {
-          world.changeTempo();  
+          world.increaseTempo();  
         }
     }
+
 }

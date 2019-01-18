@@ -34,7 +34,7 @@ public class Reader_Bar extends Actor
         
         if( pause == false)
         {
-            move(tempo);
+            move(tempo/48);
         }
         
         spaceDelay++;

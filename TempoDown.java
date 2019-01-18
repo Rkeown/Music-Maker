@@ -15,5 +15,14 @@ public class TempoDown extends Actor
     public void act() 
     {
         // Add your action code here.
+        tempoDown();
     }    
+        private void tempoDown()
+    {
+        MyWorld world = (MyWorld) getWorld();
+        if(Greenfoot.mouseClicked(this))
+        {
+            world.decreaseTempo();
+        }
+    }
 }
