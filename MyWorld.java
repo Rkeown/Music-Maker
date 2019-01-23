@@ -1,39 +1,46 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 /**
- * Write a description of class MyWorld here.
+ * MyWorld has all the code for the notes to know who they are, what length they are, and where they are, as well as the snapping map and variables.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Rory Keown
+ * @version v10, January 22 2019
  */
 public class MyWorld extends greenfoot.World
 {
+    //tempo of your song
     private int tempo = 99;
+    //changes depending on the note length to tell the game which note to add
     private int noteLength = 4;
-
+    //array for adding each note to the selection area
     private Actor[] notes = new Actor[]{ new A(), new B(), new C(), new D(), new E(), new F(), new G()};
-
+    //array for the X location of the selector notes
     private int[] notesXLocations= new int[]{ 25, 75, 125, 25, 75, 125, 25, 75};
-
+    //array for the Y location of the selector 
     private int[] notesYLocations = new int[]{375, 375, 375, 425, 425, 425, 475};
-
+    //array for the Names of each note to be added over top
+    private String[] noteNames = new String[]{"A", "B", "C", "D", "E", "F", "G"};
+    // array that adds the note length selectors
     private Actor[] noteSelection = new Actor[]{new WholeNote(), new HalfNote(), new QuaterNote(), new EighthNote()};
-
+    //array for the note selection boxes X locations
     private int[] noteSelectionX = new int[]{25, 25, 25, 25};
+    //array for the note selection boxes Y locations
     private int[] noteSelectionY = new int[]{175, 225, 275, 325};
+    //boolean for telling the program to let go of the notes
     private boolean mouseHeld = false;
-
+    // Tells the program which note has been selected so that it can add it
     private Actor newNote;
-
+    //calls so that I don't get errors from clicking any of the action buttons
     private Reset reset = new Reset();
     private Reader_Bar readerBar = new Reader_Bar();
     private TempoUp tempoUp = new TempoUp();
     private TempoDown tempoDown = new TempoDown();
     private WholeNote wholeNote = new WholeNote();
-
+    //the X location that each note uses to snap to the grid
     private int snapX;
+    // the Y loaction that each note uses to snap to the grid
     private int snapY;
-
+    //not quite sure what it does anymore but deleting it causes an error ¯\_(ツ)_/¯
     private boolean added = false;
 
     /**
@@ -42,34 +49,25 @@ public class MyWorld extends greenfoot.World
      */
     public MyWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        //sets up the sizd of the world
         super(1150, 500, 1); 
+        //the method that adds everything to the world
         addAll();
+        //method to show off my cool tempo counter(that's not actually that cool)
         displayTempo();
+        // a method to increase the tempo
         increaseTempo();
+        //a method that
         displayNoteType();
     }
 
-    public boolean addedAgain()
-    {
-        return added;
-    }
 
-    public boolean mouseHeldAgain()
-    {
-        return mouseHeld;
-    }
 
-    public int snaps()
-    {
-        return snapX;
+ 
 
-    }
+   
 
-    public int snapsAgain()
-    {
-        return snapY;
-    }
+   
 
     public int getTempo()
     {
@@ -93,6 +91,10 @@ public class MyWorld extends greenfoot.World
         addObject(readerBar, 154, getHeight()/2);
         addObject(tempoUp,75, 475);
         addObject(tempoDown, 125, 475);
+        for( int i = 0; i < notes.length; i++)
+        {
+         showText(noteNames[i], notesXLocations[i], notesYLocations[i]);
+        }
         for( int i = 0; i < notes.length; i++)
         {
             addObject( notes[i], notesXLocations[i], notesYLocations[i]);
@@ -120,13 +122,14 @@ public class MyWorld extends greenfoot.World
 
             if( Greenfoot.mousePressed(reset) == false && Greenfoot.mousePressed(readerBar) == false && 
             Greenfoot.mousePressed(tempoUp) == false && Greenfoot.mousePressed(tempoDown) == false &&
-            Greenfoot.mousePressed(wholeNote) == false)
+            Greenfoot.mousePressed(getObjects(NoteSelection.class)) == false)
             {
 
                 if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400)
                 {
                     if(noteLength == 2)
                     {
+
                         newNote = new A2();
                         addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
                     }
@@ -171,7 +174,7 @@ public class MyWorld extends greenfoot.World
                 }
                 else if( mouseLocation.getX() > 100 && mouseLocation.getX() < 150 && mouseLocation.getY() > 350 && mouseLocation.getY() < 400 )
                 {
-                             if(noteLength == 2)
+                    if(noteLength == 2)
                     {
                         newNote = new C2();
                         addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
@@ -188,33 +191,109 @@ public class MyWorld extends greenfoot.World
                     }
                     else
                     {
-                    newNote = new C();
-                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                        newNote = new C();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
                     }
                 }
                 else if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
                 {
-                    newNote = new D();
-                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    if(noteLength == 2)
+                    {
+
+                        newNote = new D2();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if(noteLength == 4)
+                    {
+                        newNote = new D4();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if( noteLength == 8)
+                    {
+                        newNote = new D8();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if (noteLength == 1)
+                    {
+                        newNote = new D();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    }
                 }
                 else if( mouseLocation.getX() > 50 && mouseLocation.getX() < 100 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
                 {
-                    newNote = new E();
-                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    if(noteLength == 2)
+                    {
+
+                        newNote = new E2();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if(noteLength == 4)
+                    {
+                        newNote = new E4();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if( noteLength == 8)
+                    {
+                        newNote = new E8();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if (noteLength == 1)
+                    {
+                        newNote = new E();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    }
                 }
                 else if( mouseLocation.getX() > 100 && mouseLocation.getX() < 150 && mouseLocation.getY() > 400 && mouseLocation.getY() < 450 )
                 {
-                    newNote = new F();
-                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    if(noteLength == 2)
+                    {
+
+                        newNote = new F2();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if(noteLength == 4)
+                    {
+                        newNote = new F4();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if( noteLength == 8)
+                    {
+                        newNote = new F8();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if (noteLength == 1)
+                    {
+                        newNote = new F();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    }
                 }
                 else if( mouseLocation.getX() > 0 && mouseLocation.getX() < 50 && mouseLocation.getY() > 450 && mouseLocation.getY() < 500  )
                 {
-                    newNote = new G();
-                    addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    if(noteLength == 2)
+                    {
+
+                        newNote = new G2();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if(noteLength == 4)
+                    {
+                        newNote = new G4();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if( noteLength == 8)
+                    {
+                        newNote = new G8();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY());
+                    }
+                    else if (noteLength == 1)
+                    {
+                        newNote = new G();
+                        addObject( newNote, mouseLocation.getX(), mouseLocation.getY() );
+                    }
                 }
             }
         }
-        else if( newNote != null && (Greenfoot.mouseClicked(null) || mouseLocation == null) )
+        else if( Greenfoot.mouseClicked(null) || mouseLocation == null )
         {
 
             snapToGrid();
@@ -233,7 +312,6 @@ public class MyWorld extends greenfoot.World
     public void snapToGrid()
     {
         MouseInfo mouseLocation = Greenfoot.getMouseInfo();
-
 
         if(mouseLocation.getX() < 150 || mouseLocation.getX() > 150 && mouseLocation.getX() < 200)
         {
@@ -369,19 +447,21 @@ public class MyWorld extends greenfoot.World
 
     private void snapShift()
     {
-        if( noteLength == 2)
+        if( newNote != null )
         {
-            newNote.setLocation(newNote.getX()-13,newNote.getY());
+            if( noteLength == 2)
+            {
+                newNote.setLocation(newNote.getX()-13,newNote.getY());
+            }
+            else if( noteLength == 4)
+            {
+                newNote.setLocation(newNote.getX()-19,newNote.getY());
+            }
+            else if (noteLength == 8)
+            {
+                newNote.setLocation(newNote.getX()-22,newNote.getY());
+            }
         }
-        else if( noteLength == 4)
-        {
-            newNote.setLocation(newNote.getX()-19,newNote.getY());
-        }
-        else if (noteLength == 8)
-        {
-            newNote.setLocation(newNote.getX()-22,newNote.getY());
-        }
-
     }
 
     private void displayTempo()
