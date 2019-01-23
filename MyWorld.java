@@ -57,7 +57,7 @@ public class MyWorld extends greenfoot.World
         displayTempo();
         // a method to increase the tempo
         increaseTempo();
-        //a method that
+        //a method that appears over the different notes to show which is which
         displayNoteType();
     }
 
@@ -68,22 +68,31 @@ public class MyWorld extends greenfoot.World
    
 
    
-
+    /**
+     * getTempo returns the tempo so that the reader bar moves at the speed of the tempo
+     * @param there are no parameters
+     * @return it returns an intiger which just so happens to be the tempo
+     */
     public int getTempo()
     {
         return tempo;
     }
-
-    public void setTempo(int t)
-    {
-        tempo = t;
-    }
-
+    
+     
+    /**
+     * noteLengthReturn lets other classes access noteLength
+     * @param there are no parameters
+     * @return it returns an intiger which is noteLength
+     */
     public int noteLengthReturn()
     {
         return noteLength;
     }
-
+    /**
+     * addAll just adds everything to the world
+     * @param there are no parameters
+     * @return there are no returns
+     */
     private void addAll()
     {
 
@@ -105,12 +114,20 @@ public class MyWorld extends greenfoot.World
         }
 
     }
-
+    /**
+     *  the act method that runs what ever is in it once per cycle
+     *  @param there are no parameters
+     *  @return there is no returns
+     */
     public void act()
     {
         dragAndDrop();
     }
-
+    /**
+     * dragAndDrop has all the code to tell the program how to drag and drop each type of note
+     * @param there are no parmeters
+     * @return there are no returns
+     */
     public void dragAndDrop()
     {
         MouseInfo mouseLocation = Greenfoot.getMouseInfo();
@@ -308,7 +325,11 @@ public class MyWorld extends greenfoot.World
             newNote.setLocation( mouseLocation.getX(), mouseLocation.getY() );
         }
     }
-
+    /**
+     * snapToGrid checks the mouse position when a block is being held and snaps it to the nearest grid
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     public void snapToGrid()
     {
         MouseInfo mouseLocation = Greenfoot.getMouseInfo();
@@ -444,7 +465,11 @@ public class MyWorld extends greenfoot.World
         }
 
     }
-
+    /**
+     * snapShift runs along side snapToGrid but just offsets the blocks in accordance to the note length so that they fit
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     private void snapShift()
     {
         if( newNote != null )
@@ -463,37 +488,63 @@ public class MyWorld extends greenfoot.World
             }
         }
     }
-
+    /**
+     * displayTempo shows what the tempo is so that you can easily tell
+     *@param there are no parameters
+     *@return nothing is returned
+     */
     private void displayTempo()
     {
         showText("Tempo  " + tempo , 60, 90);
 
     }
-
+    /**
+     * displayNoteType is a counter similar to the tempo but instead display what the current note type selected is
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     private void displayNoteType()
     {
         showText(" Note Length " + noteLength , 66, 115);
     }
-
+    /**
+     * increaseTempo is accessed by an other classe so that it can increase the tempo
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     public void increaseTempo()
     {
         tempo++;
         displayTempo();
     }
-
+    /**
+     * decreaseTempo does the oposite of increase tempo
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     public void decreaseTempo()
     {
         tempo--;
         displayTempo();
     }
-
+    /**
+     * reset gets a list of everything in the world removes them then calls addAll to re-add everything
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     public void reset()
     {
         List allObjects = getObjects(null);
         removeObjects(allObjects);
         addAll();
+        tempo = 100;
+        noteLength = 4;
     }
-
+    /**
+     * setNoteLength allows other classes to change the note length
+     * @param there is an intiger called length so that other classes can use it to quickly change the note lenght
+     * @return nothing is returned
+     */
     public void setNoteLength( int length )
     {
         noteLength = length;

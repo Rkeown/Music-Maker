@@ -6,4 +6,5 @@ comment1.target=void\ act()
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ G8\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment2.params=
 comment2.target=void\ moveOver()
+comment2.text=\r\n\ moveOver\ tells\ the\ block\ to\ move\ over\ if\ its\ touching\ another\ block\ to\ move\ over\r\n\ @param\ there\ are\ no\ parameters\r\n\ @return\ there\ are\ no\ returns\r\n
 numComments=3

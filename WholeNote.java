@@ -17,6 +17,11 @@ public class WholeNote extends NoteSelection
         // Add your action code here.
         changeNote();
     }    
+    /**
+     * changeNote access the noteLength variable from world and sets it equal to the name of this class
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     private void changeNote()
     {
         MyWorld world = (MyWorld) getWorld();

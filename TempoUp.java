@@ -17,6 +17,11 @@ public class TempoUp extends Actor
         // Add your action code here.
         tempoUp();
     }    
+    /**
+     * tempoUp accesses the increaseTempo method from the world when clicked
+     * @param there are o parameters
+     * @return nothing is returned
+     */
     private void tempoUp()
     {
         MyWorld world = (MyWorld) getWorld();

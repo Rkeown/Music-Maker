@@ -6,4 +6,5 @@ comment1.target=void\ act()
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ TempoUp\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment2.params=
 comment2.target=void\ tempoUp()
+comment2.text=\r\n\ tempoUp\ accesses\ the\ increaseTempo\ method\ from\ the\ world\ when\ clicked\r\n\ @param\ there\ are\ o\ parameters\r\n\ @return\ nothing\ is\ returned\r\n
 numComments=3

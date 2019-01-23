@@ -17,6 +17,11 @@ public class Reset extends Actor
         // Add your action code here.
         resetObjects();
     }    
+    /**
+     * calls the reset function in world when clicked
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     private void resetObjects()
     {
         MyWorld world = (MyWorld) getWorld();

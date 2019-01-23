@@ -22,6 +22,12 @@ public class Reader_Bar extends Actor
         wall();
         playSound();
     }    
+    /**
+     * startScrolling tell the reader bar to move at the speed of the tempo divided by 48 so its accurate
+     * and has code so that when space is pressed it will either pause the movement or start it again
+     * @param there are no parametes
+     * @return nothing is returned
+     */
     private void startScrolling()
     {
         MyWorld world = (MyWorld)getWorld();
@@ -39,6 +45,11 @@ public class Reader_Bar extends Actor
         
         spaceDelay++;
     }
+    /**
+     * wall tells the reader bar to reset its postion to whn the program is fisrt started when it hits the end
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     private void wall()
     {
         if(isAtEdge())
@@ -46,6 +57,11 @@ public class Reader_Bar extends Actor
          setLocation(154, getWorld().getHeight()/2);
         }
     }
+    /**
+     * playSound tells the reader bar to play the corresponding sound when touching a not
+     * @param there are no parameters
+     * @return nothing is returned
+     */
     private void playSound()
     {
         if(pause == false)

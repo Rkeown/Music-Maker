@@ -17,6 +17,11 @@ public class TempoDown extends Actor
         // Add your action code here.
         tempoDown();
     }    
+    /**
+     * tempoDown accesses the decreaseTempo method from world when clicked
+     * @param there are no parameters
+     * @return nothing is returned
+     */
         private void tempoDown()
     {
         MyWorld world = (MyWorld) getWorld();
