@@ -14,6 +14,37 @@ public class C8 extends C
      */
     public void act() 
     {
-        // Add your action code here.
+        moveOver();
     }    
+    private void moveOver()
+    {
+        if( isTouching(A.class) && getX() > 149)
+        {
+            move(2); 
+        }
+        else if(isTouching(B.class)&& getX() > 149)
+        {
+            move(1);
+        }
+        else if(isTouching(C.class)&& getX() > 149)
+        {
+            move(1);
+        }
+        else if(isTouching(D.class)&& getX() > 149)
+        {
+            move(1);
+        }
+        else if(isTouching(E.class)&& getX() > 149)
+        {
+            move(1);
+        }
+        else if(isTouching(F.class)&& getX() > 149)
+        {
+            move(1);
+        }
+        else if(isTouching(G.class)&& getX() > 149)
+        {
+            move(1);
+        }
+    }
 }
