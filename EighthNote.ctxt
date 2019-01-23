@@ -6,4 +6,5 @@ comment1.target=void\ act()
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ EighthNote\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment2.params=
 comment2.target=void\ changeNote()
+comment2.text=\r\n\ changeNote\ access\ the\ noteLength\ variable\ from\ world\ and\ sets\ it\ equal\ to\ the\ name\ of\ this\ class\r\n\ @param\ there\ are\ no\ parameters\r\n\ @return\ nothing\ is\ returned\r\n
 numComments=3

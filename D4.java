@@ -16,6 +16,11 @@ public class D4 extends D
     {
         moveOver();
     }    
+    /**
+     * moveOver tells the block to move over if its touching another block to move over
+     * @param there are no parameters
+     * @return there are no returns
+     */
     private void moveOver()
     {
         if( isTouching(A.class) && getX() > 149)
